@@ -18,39 +18,15 @@ class Game {
             bullet.draw()
         }
     }
-    wallsTankCollision(){
+    wallsTankCollision(box1, box2){//box1 - tank, box2 - wall
 
     }
     wallsBulletsCollision() {
         for (let wall of walls) {
             for (let bullet of bullets) {
-                if ((bullet.x >= wall.x) && (bullet.x + bullet.w <= wall.x + wall.w) && (bullet.y >= wall.y) && (bullet.y + bullet.h <= wall.y + wall.h)) {
-                    let bulletHalfW = bullet.w / 2;
-                    let bulletHalfH = bullet.h / 2;
-                    let wallHalfW = wall.w / 2;
-                    let wallHalfH = wall.h / 2;
-                    let bulletCenterX = bullet.x + bulletHalfW;
-                    let bulletCenterY = bullet.y + bulletHalfH;
-                    let wallCenterX = wall.x + wall.w / 2;
-                    let wallCenterY = wall.y + wall.h / 2;
-                    let diffX = bulletCenterX - wallCenterX;
-                    let diffY = bulletCenterY - wallCenterY;
-                    let minXDist = bulletHalfW + wallHalfW;
-                    let minYDist = bulletHalfH + wallHalfH;
-                    let depthX = (diffX > 0) ? minXDist - diffX : -minXDist - diffX;
-                    let depthY = (diffY > 0) ? minYDist - diffY : -minYDist - diffY;
-                    if (depthX != 0 && depthY != 0) {
-                        if (Math.abs(depthX) < Math.abs(depthY)) {
-                            bullet.deg = -bullet.deg  + 180;
-                        } else {
-                            bullet.deg = -bullet.deg + 360;
-                        }
-                    }
-                }
+                bullet.rebound(wall)//отскок от стены
             }
         }
-
-
     }
 
     drawTanks() {
@@ -61,10 +37,10 @@ class Game {
 
     StartGame() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height)
-        this.move();
-        this.drawWalls()
+        this.move();//сдвиг,поворот,стрельба
+        this.drawWalls()//
         this.drawBullets()
-        this.wallsBulletsCollision()
+        this.wallsBulletsCollision()//отскок пуль от стен
         this.drawTanks()
         // bullets.forEach((bullet, index) => {
         //     if (bullet.isDead()) {

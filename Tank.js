@@ -32,13 +32,12 @@ class Tank {
     }
 
     resetDeg() {
-        if (this.deg > 360) {
+        if (this.deg > 360 || this.deg < -360)
             this.deg = 0
-        } else if (this.deg < -360) {
-            this.deg = -0
-        }
     }
+    rebound(wall){//cтолкнулся ли танк с конкретной стеной
 
+    }
     draw() {
         if (!this.hasBeenHit)
             this.drawWithRot()
