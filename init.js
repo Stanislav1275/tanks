@@ -29,7 +29,7 @@ let bullets = [];
 let walls = [];
 let currentSeconds = () => new Date() / 1000;
 walls = [
-    new Wall(0, 0, canvas.width, 40),
+    new Wall(300,300, 100, 40),
     new Wall(0, 0, 40, canvas.height),
     new Wall(0, canvas.height-40, canvas.width, 40),
     new Wall(canvas.width-40, 0, 40, canvas.width),

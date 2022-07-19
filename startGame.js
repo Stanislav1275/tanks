@@ -195,11 +195,12 @@ class Game {
         ]
         let polygonA = new Polygon(polygonAVertices, polygonAEdges);
         let polygonB = new Polygon(polygonBVertices, polygonBEdges);
-        // if (SAT(polygonA, polygonB)) {
-        //     return true
-        // }
-        //
-        // return false;
+        console.log(polygonA,polygonB)
+        if (SAT(polygonA, polygonB)) {
+            return true
+        }
+
+        return false;
     }
 
     move() {
@@ -227,11 +228,10 @@ class Game {
     StartGame() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height)
         this.move();//сдвиг,поворот,стрельба
-        this.drawWalls();//
         this.drawBullets();
+        this.drawWalls()
+
         this.wallsBulletsCollision();
-        this.rebound(tanks[0], walls[0])
-        // this.rebound(tanks[0], walls[0])
         this.drawTanks();
 
         // this.rebound(walls[0],tanks[0])
