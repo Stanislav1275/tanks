@@ -15,7 +15,7 @@ class Bullet {
         this.x += (this.speed * Math.cos(this.deg * oneRad));
         this.y += (this.speed * Math.sin(this.deg * oneRad));
     }
-    rebound(wall){
+    rebound(wall){//cтолкнулась ли пуля с конкретной стеной
         if ((this.x >= wall.x) && (this.x + this.w <= wall.x + wall.w) && (this.y >= wall.y) && (this.y + this.h <= wall.y + wall.h)) {
             let bulletHalfW = this.w / 2;
             let bulletHalfH = this.h / 2;
