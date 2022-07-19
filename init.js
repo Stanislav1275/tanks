@@ -77,7 +77,7 @@ function init() {
         randomX = Math.random() * (max - min) + min;
         randomY = Math.random() * (max - min) + min;
         tankConstructor = TANKS_CONTRUCTORS[i];
-        tanks.push(new Tank(tankConstructor, randomX, randomY, 0))
+        tanks.push(new Tank(tankConstructor, max, min, 0))
         max += 50;
         min += 90;
     }
