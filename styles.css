@@ -1,0 +1,128 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#back {
+    display: none;
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    background-color: blue;
+
+}
+
+#back.none {
+    left: 30%;
+    display: block;
+    position: absolute;
+}
+#pause {
+    display: none;
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    background-color: blue;
+
+}
+
+#pause.none {
+    left: 50%;
+    display: block;
+    position: absolute;
+}
+#canvas {
+    display: none;
+
+    background-color: #eee;
+}
+.block{
+}
+.game {
+    /*width: 800px;*/
+    /*height: 600px;*/
+    position: relative;
+
+}
+
+#canvas.none {
+    display: block;
+
+}
+
+#btns {
+    display: block;
+    width: 38%;
+}
+
+#btns.none {
+    display: none;
+}
+
+#scoreBlock.none {
+    height: 200px;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    background-color: #8bd76e;
+    border-radius:  0 0 20px 20px;
+}
+#scoreBlock.none .tank{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+#scoreBlock.none .tank:nth-child(1){
+    border: 1px solid black;
+    color: green;
+}
+#scoreBlock.none .tank:nth-child(2){
+    border: 1px solid black;
+
+    color: yellow;
+}
+#scoreBlock.none .tank:nth-child(3){
+    border: 1px solid black;
+
+    color: red;
+}
+#scoreBlock {
+    display: none;
+}
+
+#scoreBlock h1 {
+
+}
+
+.game {
+    min-height: 120%;
+    /*padding: 50px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    background-color: #eee;
+
+}
+
+.game button {
+    width: 100%;
+    height: 50px;
+    /*margin-bottom: 20px;*/
+}
+
+.cfgBtn {
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+

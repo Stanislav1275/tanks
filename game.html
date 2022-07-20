@@ -1,32 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--        <link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body margin = "0" padding = "0">
+<body margin="0" padding="0">
 
 <div class="block">
-    <style>
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        canvas{
-            background-color: #eee;
-        }
-    </style>
-    <canvas id = "canvas"></canvas>
+    <div class="game">
+        <div id="btns">
+            <div id="play">
+                <button class="playBtn">
+                    <h1>play</h1>
+                </button>
+            </div>
+            <div class="setConfigurations">
+                <button class="cfgBtn">
+                    клавиши
+                </button>
+            </div>
+        </div>
+        <canvas id="canvas"></canvas>
+
+    </div>
+    <div id="scoreBlock">
+
+    </div>
+    <div id="back"></div>
+    <div id="pause"></div>
+
 </div>
-<script src="Polygon.js"></script>
-<script src="Tank.js"></script>
-<script src="Wall.js"></script>
-<script src="Bullet.js"></script>
-<script src="init.js"></script>
-<script src="startGame.js"></script>
-<script src="game.js"></script>
+
+<script src="./menu.js"></script>
+<script src="./Polygon.js"></script>
+<script src="./Tank.js"></script>
+<script src="./Wall.js"></script>
+<script src="./Bullet.js"></script>
+<script src="./init.js"></script>
+<script src="./Animations.js"></script>
+<script src="./checkScore.js"></script>
+<script src="./startGame.js"></script>
+<script src="./game.js"></script>
+
 </body>
 </html>

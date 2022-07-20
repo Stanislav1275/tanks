@@ -5,6 +5,7 @@ class Wall {
         this.h = h;
         this.w = w;
     }
+
     draw() {
         ctx.fillRect(this.x, this.y, this.w, this.h);
     }
