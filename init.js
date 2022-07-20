@@ -2,8 +2,11 @@ let canvas = document.querySelector("#canvas")
 var ctx = canvas.getContext("2d")
 let result = document.querySelector("#scoreBlock")
 
-canvas.width = 1200;
-canvas.height = 800;
+let width = mapWidth * WALL_CONST;
+let height = mapHeight * WALL_CONST;
+
+canvas.width = width;
+canvas.height = height;
 result.style.width  = `${canvas.width}px`
 gameContainer.style.width = `${canvas.width}px`
 gameContainer.style.height  = `${canvas.height}px`
@@ -44,13 +47,14 @@ let tanks = [];
 let bullets = [];
 let walls = [];
 let currentSeconds = () => new Date() / 1000;
-walls = [
+walls = getMap();
+/*[
     new Wall(300,300, 100, 20),
     new Wall(0,0, canvas.width, 20),
     new Wall(0, 0, 20, canvas.height),
     new Wall(0, canvas.height-20, canvas.width, 20),
     new Wall(canvas.width-20, 0, 20, canvas.width),
-]
+]*/
 class TANK_CONSTRUCTOR {
     constructor(keys, SPRITE) {
         this.keys = keys;
@@ -85,17 +89,18 @@ function init() {
                 }, red_tank_img
             ),
         ]
-    let max = 100;
-    let min = 10;
-    let randomX = 100, randomY = 10;
+    //let randomX = 100, randomY = 10;
     let tankConstructor = null;
-
+    let spawn = getSpawnPosition()
     for (let i = 0; i < 3; i++) {
 
-        randomX = Math.abs(Math.floor((Math.random()*720)-40-48))
-        randomY = Math.abs(Math.floor((Math.random()*520)-40-48))
+        //randomX = Math.abs(Math.floor((Math.random()*720)-40-48))
+        //randomY = Math.abs(Math.floor((Math.random()*520)-40-48))
+        //console.log(randomX,randomY)
+
+
         tankConstructor = TANKS_CONTRUCTORS[i];
-        tanks.push(new Tank(tankConstructor, randomX, randomY, Math.floor(Math.random())*360))
+        tanks.push(new Tank(tankConstructor, spawn[i][0], spawn[i][1], Math.floor(Math.random())*360))
     }
     let fon = ""//фоновая музыка
     // (function playSound(fon){

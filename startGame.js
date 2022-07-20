@@ -11,12 +11,12 @@ class Game {
             i++
             if(animation.type === 1){
                 if(expSprites[animation.startIt]!=undefined)
-                this.ctx.drawImage(expSprites[animation.startIt],animation.x,animation.y)
+                    this.ctx.drawImage(expSprites[animation.startIt],animation.x,animation.y)
             }
             animation.animationDelay++
             if(animation.animationDelay == 8){
                 if(animation.startIt<16)
-                animation.startIt++
+                    animation.startIt++
                 animation.animationDelay=0
 
             }
@@ -50,22 +50,21 @@ class Game {
                             bullet.deg = -bullet.deg + 360;
                         }
                     }
+                    wall.onCollide();
                 }
             }
         }
     }
     bulletsTanksCollision(){
-        let tankIndex = -1
+        let tankIndex
         for(let tank of tanks){
-            tankIndex++
+            tankIndex= 0
             for (let i = 0; i < bullets.length; i++) {
                 if (willCollide(tank, bullets[i]) && !tank.hasBeenHit && bullets[i]?.owner!=tank) {
                     animations.push(new Animation(1,bullets[i].x-tank.w,bullets[i].y-tank.h))
                     playSound("./sounds/explosion.mp3",0.1)
                     // bullets[i].owner.bulletsCount--;
                     bullets[i].owner.score++;
-
-
                     tank.hasBeenHit = true;
                     bullets[i].owner.bulletsCount--;
                     bullets.splice(i, 1);
@@ -76,6 +75,7 @@ class Game {
                     // }
                 }
             }
+            tankIndex++
         }
     }
 
@@ -92,8 +92,7 @@ class Game {
         return false
     }
     drawWalls() {
-        for (let wall of walls)
-            wall.draw();
+        for (let wall of walls) if (wall.isCollideable) wall.draw();
     }
     FindHasBeenHitCount(){
         let hasBeenHitCount = 0
@@ -106,29 +105,33 @@ class Game {
         this.FindHasBeenHitCount()
         if(this.CountHasBeenHit == tanks.length-1){
             this.pause = true
-                setTimeout( () => {
-                   // location.reload()
-                    bullets = []
-                    for(let tank of tanks){
-                        let randomX = Math.floor((Math.random()*720)-40)
-                        let randomY = Math.floor((Math.random()*520)-40)
-                        tank.x = randomX
-                        tank.y = randomY
-                        tank.hasBeenHit = false
-                        animations = []
-                        this.pause = false
-                    }
-                },1000)
+            setTimeout( () => {
+                // location.reload()
+                bullets = []
+                let spawn = getSpawnPosition();
+                let ctr = 0;
+                for(let tank of tanks){
+                    tank.x = spawn[ctr][0]
+                    tank.y = spawn[ctr++][1]
+                    tank.deg = 0
+                    walls = getMap(getRandomInt(150) + 180);
+                    tank.hasBeenHit = false
+                    animations = []
+                    this.pause = false
+                }
+            },1000)
 
 
             // }
         }
+
     }
     drawBullets() {
         for (let i = 0; i < bullets.length; i++) {
-                bullets[i].draw()
+            bullets[i].draw()
             if(!this.pause)
                 if (currentSeconds() - bullets[i].timeOfBirth > 5) {
+                    console.log(currentSeconds() + " sec")
                     bullets.splice(i, 1)
                     // bullets[i].owner.bulletsCount--;
 
@@ -144,17 +147,18 @@ class Game {
     }
 
     StartGame() {
+        console.log(bullets[0]?.timeOfBirth + " birth")
         if(!this.pause){
             this.ctx.clearRect(20, 20, canvas.width, canvas.height)
-            this.resetGame();
-            this.move();;
-            this.drawBullets();
-            this.drawExp();
-            this.wallsBulletsCollision();
-            this.bulletsTanksCollision();
-            this.drawTanks();
+            this.resetGame()
+            this.move();
+            this.drawBullets()
+            this.drawExp()
+            this.drawTanks()
+            this.drawWalls()
             initResult()
-            this.drawWalls();
+            this.wallsBulletsCollision()
+            this.bulletsTanksCollision()
         }
         else {
             for(let bullet of bullets){
