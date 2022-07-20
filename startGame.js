@@ -55,15 +55,17 @@ class Game {
         }
     }
     bulletsTanksCollision(){
-        let tankIndex
+        let tankIndex = -1
         for(let tank of tanks){
-            tankIndex= 0
+            tankIndex++
             for (let i = 0; i < bullets.length; i++) {
                 if (willCollide(tank, bullets[i]) && !tank.hasBeenHit && bullets[i]?.owner!=tank) {
                     animations.push(new Animation(1,bullets[i].x-tank.w,bullets[i].y-tank.h))
                     playSound("./sounds/explosion.mp3",0.1)
                     // bullets[i].owner.bulletsCount--;
                     bullets[i].owner.score++;
+
+
                     tank.hasBeenHit = true;
                     bullets[i].owner.bulletsCount--;
                     bullets.splice(i, 1);
@@ -74,7 +76,6 @@ class Game {
                     // }
                 }
             }
-            tankIndex++
         }
     }
 
@@ -128,7 +129,6 @@ class Game {
                 bullets[i].draw()
             if(!this.pause)
                 if (currentSeconds() - bullets[i].timeOfBirth > 5) {
-                    console.log(currentSeconds() + " sec")
                     bullets.splice(i, 1)
                     // bullets[i].owner.bulletsCount--;
 
@@ -144,18 +144,17 @@ class Game {
     }
 
     StartGame() {
-        console.log(bullets[0]?.timeOfBirth + " birth")
         if(!this.pause){
             this.ctx.clearRect(20, 20, canvas.width, canvas.height)
-            this.resetGame()
-            this.move();
-            this.drawBullets()
-            this.drawExp()
-            this.drawTanks()
-            this.drawWalls()
+            this.resetGame();
+            this.move();;
+            this.drawBullets();
+            this.drawExp();
+            this.wallsBulletsCollision();
+            this.bulletsTanksCollision();
+            this.drawTanks();
             initResult()
-            this.wallsBulletsCollision()
-            this.bulletsTanksCollision()
+            this.drawWalls();
         }
         else {
             for(let bullet of bullets){

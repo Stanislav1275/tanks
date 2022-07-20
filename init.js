@@ -94,7 +94,6 @@ function init() {
 
         randomX = Math.abs(Math.floor((Math.random()*720)-40-48))
         randomY = Math.abs(Math.floor((Math.random()*520)-40-48))
-        console.log(randomX,randomY)
         tankConstructor = TANKS_CONTRUCTORS[i];
         tanks.push(new Tank(tankConstructor, randomX, randomY, Math.floor(Math.random())*360))
     }

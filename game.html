@@ -9,26 +9,34 @@
 
 <div class="block">
     <div class="game">
+        <div class="setConfigurations">
+            <button class="cfgBtn">
+                клавиши
+            </button>
+        </div>
         <div id="btns">
             <div id="play">
                 <button class="playBtn">
-                    <h1>play</h1>
+                    <img src="./sprites/upaused.png" alt="">
                 </button>
             </div>
-            <div class="setConfigurations">
-                <button class="cfgBtn">
-                    клавиши
-                </button>
-            </div>
-        </div>
-        <canvas id="canvas"></canvas>
 
+        </div>
+
+        <canvas id="canvas"></canvas>
     </div>
     <div id="scoreBlock">
 
     </div>
-    <div id="back"></div>
-    <div id="pause"></div>
+    <div class="pause_back">
+        <div id="back">
+            <img src="./sprites/back.png" alt="">
+        </div>
+        <div id="pause">
+            <img src="./sprites/pause.png" alt="">
+        </div>
+    </div>
+
 
 </div>
 
@@ -37,8 +45,8 @@
 <script src="./Tank.js"></script>
 <script src="./Wall.js"></script>
 <script src="./Bullet.js"></script>
-<script src="./init.js"></script>
 <script src="./Animations.js"></script>
+<script src="./init.js"></script>
 <script src="./checkScore.js"></script>
 <script src="./startGame.js"></script>
 <script src="./game.js"></script>

@@ -1,4 +1,3 @@
-
 let gameHolst = document.querySelector("#canvas");
 let gameContainer = document.querySelector(".game")
 let btn  = document.querySelector("#play");
@@ -20,5 +19,12 @@ btn.onclick = toggle;
 back.onclick = toggle;
 pause.onclick = () => {
     game.pause = !game.pause
+    changeBtnPause(game.pause)
 
+}
+function changeBtnPause(isPause){
+    let img = pause.querySelector("img")
+    if(isPause){
+        img.src = "./sprites/upaused.png"
+    }else img.src = "./sprites/pause.png"
 }
