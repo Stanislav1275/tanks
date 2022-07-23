@@ -291,7 +291,11 @@ class Tank {
                 }, this.x + Math.cos(this.deg * oneRad), this.y + Math.sin(this.deg * oneRad), this.deg
             )
             for (let wall of walls) {
-                if (willCollide(t, wall)) isCollision = true
+                if (willCollide(t, wall)) {
+                    isCollision = true
+                    console.log(1)
+
+                }
             }
             if (!isCollision)
                 this.VerticalMovement(true)

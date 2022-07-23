@@ -10,18 +10,27 @@ canvas.height = height;
 result.style.width  = `${canvas.width}px`
 gameContainer.style.width = `${canvas.width}px`
 gameContainer.style.height  = `${canvas.height}px`
-
+let gold_wall = new Image()
 let green_tank_img = new Image()
 let yellow_tank_img = new Image()
 let red_tank_img = new Image()
 let blue_tank_img = new Image()
+let keys_green = new Image()
+let keys_yellow = new Image()
+let keys_red = new Image()
+let keys_blue = new Image()
 let bullet = new Image()
+gold_wall.src= "./sprites/gold_wall.png"
+keys_green.src = "./sprites/keys_green.png" ;
+keys_yellow.src = "./sprites/keys_yellow.png" ;
+keys_red.src = "./sprites/keys_red.png" ;
+keys_blue.src = "./sprites/blue_keys.png";
 green_tank_img.src = "./sprites/tank_green.png";
 yellow_tank_img.src = "./sprites/tank_yellow.png";
-red_tank_img.src = "./sprites/tank_red.png"
-blue_tank_img.src = "./sprites/tank_blue.png"
-bullet.src = "./sprites/bullet.png"
-let oneRad = Math.PI / 180
+red_tank_img.src = "./sprites/tank_red.png";
+blue_tank_img.src = "./sprites/tank_blue.png";
+bullet.src = "./sprites/bullet.png";
+let oneRad = Math.PI / 180;
 let expSprites = [
 
 ]
@@ -56,9 +65,10 @@ walls = getMap();
     new Wall(canvas.width-20, 0, 20, canvas.width),
 ]*/
 class TANK_CONSTRUCTOR {
-    constructor(keys, SPRITE) {
+    constructor(keys, SPRITE, keysImg) {
         this.keys = keys;
         this.sprite = SPRITE;
+        this.keysImg = keysImg
     }
 }
 
@@ -71,7 +81,7 @@ function init() {
                 down: "KeyS",
                 right: "KeyD",
                 attack: "KeyQ",
-            }, green_tank_img),
+            }, green_tank_img,keys_green),
             new TANK_CONSTRUCTOR({
                 up: "KeyI",
                 left: "KeyJ",
@@ -79,36 +89,35 @@ function init() {
                 right: "KeyL",
                 attack: "KeyY",
 
-            }, yellow_tank_img),
+            }, yellow_tank_img,keys_yellow),
             new TANK_CONSTRUCTOR({
                     up: "ArrowUp",
                     left: "ArrowLeft",
                     down: "ArrowDown",
                     right: "ArrowRight",
                     attack: "ControlRight",
-                }, red_tank_img
+                }, red_tank_img,keys_red
+            ),
+            new TANK_CONSTRUCTOR({
+                    up: "Numpad8",
+                    left: "Numpad4",
+                    down: "Numpad5",
+                    right: "Numpad6",
+                    attack: "Numpad0",
+                }, blue_tank_img,keys_blue
             ),
         ]
     //let randomX = 100, randomY = 10;
     let tankConstructor = null;
-    let spawn = getSpawnPosition()
-    for (let i = 0; i < 3; i++) {
+    // let spawn;
+    if(tanksCount!=null)
+    // spawn = getSpawnPosition(tanksCount)
 
-        //randomX = Math.abs(Math.floor((Math.random()*720)-40-48))
-        //randomY = Math.abs(Math.floor((Math.random()*520)-40-48))
-        //console.log(randomX,randomY)
-
-
+    if(tanksCount!=null)
+    for (let i = 0; i < tanksCount; i++) {
         tankConstructor = TANKS_CONTRUCTORS[i];
         tanks.push(new Tank(tankConstructor, spawn[i][0], spawn[i][1], Math.floor(Math.random())*360))
     }
-    let fon = ""//фоновая музыка
-    // (function playSound(fon){
-    //     let sound = new Audio()
-    //     sound.src = fon
-    //     sound.play()
-    // }())
-
 }
 function playSound(source,volume){
     let sound = new Audio()

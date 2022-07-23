@@ -16,7 +16,19 @@ class Wall {
     }
 
     draw() {
-        ctx.fillRect(this.x, this.y, this.w, this.h);
+        // ctx.fillRect(this.x, this.y, this.w, this.h);
+        // gold_wall.onload = () => {
+        if(!this.isConstant){
+            if(this.health == 2)
+            ctx.drawImage(grand_wall,this.x,this.y, this.w,this.h)
+            else if(this.health == 3)            ctx.drawImage(gold_wall,this.x,this.y, this.w,this.h)
+            else             ctx.drawImage(puton_wall,this.x,this.y, this.w,this.h)
+
+
+        }
+        else ctx.fillRect(this.x,this.y,this.w,this.h)
+        //
+        // }
     }
 
     axisChoose(){
@@ -28,7 +40,7 @@ class Wall {
     onCollide(){
         if (!this.isConstant) {
             this.health -= 1;
-            console.log(`health changed to ${this.health}`)
+            //console.log(`health changed to ${this.health}`)
             switch(this.axisOnBulletCollision)
             {
                 case "h": this.h -= this.collisionStepH;
@@ -39,12 +51,12 @@ class Wall {
                     break;
                 default: this.w -= this.collisionStepW;
                     this.h -= this.collisionStepH;
-                    console.log(`Wall & bullet collision detected! Yoo, rare case! Square! Height and Width changed to ${this.h} and ${this.w} at offset: ${this.x}, ${this.y}`);
+                    //console.log(`Wall & bullet collision detected! Yoo, rare case! Square! Height and Width changed to ${this.h} and ${this.w} at offset: ${this.x}, ${this.y}`);
                     break;
             }
             if (!this.health) {
                 this.isCollideable = !this.isCollideable;
-                console.log(`Wall at offset ${this.x}, ${this.y} is no longer exist`)
+                //console.log(`Wall at offset ${this.x}, ${this.y} is no longer exist`)
             }
         }
     }

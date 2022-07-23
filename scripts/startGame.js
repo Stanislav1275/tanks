@@ -1,4 +1,3 @@
-
 class Game {
     constructor(context) {
         this.ctx = context;
@@ -108,7 +107,8 @@ class Game {
             setTimeout( () => {
                 // location.reload()
                 bullets = []
-                let spawn = getSpawnPosition();
+                init()
+                let spawn = getSpawnPosition(tanks.length);
                 let ctr = 0;
                 for(let tank of tanks){
                     tank.x = spawn[ctr][0]
@@ -130,8 +130,8 @@ class Game {
         for (let i = 0; i < bullets.length; i++) {
             bullets[i].draw()
             if(!this.pause)
-                if (currentSeconds() - bullets[i].timeOfBirth > 5) {
-                    console.log(currentSeconds() + " sec")
+                if (currentSeconds() - bullets[i].timeOfBirth > 8) {
+                    //console.log(currentSeconds() + " sec")
                     bullets.splice(i, 1)
                     // bullets[i].owner.bulletsCount--;
 
@@ -147,24 +147,23 @@ class Game {
     }
 
     StartGame() {
-        console.log(bullets[0]?.timeOfBirth + " birth")
-        if(!this.pause){
-            this.ctx.clearRect(20, 20, canvas.width, canvas.height)
-            this.resetGame()
-            this.move();
-            this.drawBullets()
-            this.drawExp()
-            this.drawTanks()
-            this.drawWalls()
-            initResult()
-            this.wallsBulletsCollision()
-            this.bulletsTanksCollision()
-        }
-        else {
-            for(let bullet of bullets){
-                // bullet.timeOfBirth +=0.000001
+        if(tanksCount !=null){
+            if(!this.pause){
+                this.ctx.clearRect(0, 0, canvas.width, canvas.height)
+                this.resetGame()
+                this.move();
+                this.drawBullets()
+                this.drawExp()
+                this.drawTanks()
+                this.drawWalls()
+                initResult()
+                this.wallsBulletsCollision()
+                this.bulletsTanksCollision()
+            }
+            else {
             }
         }
+
 
         requestAnimationFrame(() => {
             this.StartGame()
@@ -177,4 +176,7 @@ class Game {
 }
 
 let game = new Game(ctx)
-game.StartGame()
+// setInterval( () => {
+    game.StartGame()
+
+// },10)

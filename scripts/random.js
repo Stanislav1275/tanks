@@ -9,7 +9,7 @@ const SPAWN_PLACES = [
     [mapWidth - 2.5, 1.5],
     [mapWidth - 2.5, mapHeight - 2.5]
 ];
-console.log(`curr Val of mapWidth = ${mapWidth} or as it calculated : ${canvas.width / WALL_CONST}`);
+//console.log(`curr Val of mapWidth = ${mapWidth} or as it calculated : ${canvas.width / WALL_CONST}`);
 
 
 function getRandomInt(max) {
@@ -31,16 +31,17 @@ function getRandArr(limit, size)
     return randArr
 }
 
-function getSpawnPosition()
+function getSpawnPosition(tanksCount)
 {
-    let randArr = getRandArr(4, 3);
+    let randArr = getRandArr(4, tanksCount);
     let res = [
-        [ , ],
-        [ , ],
-        [ , ]
-    ]
 
-    for (let i = 0; i < 3; ++i)
+    ]
+    for(let i = 0; i < tanksCount; i++){
+        res.push([])
+    }
+
+    for (let i = 0; i < tanksCount; ++i)
     {
         res[i][0] = SPAWN_PLACES[randArr[i]][0] * WALL_CONST;
         res[i][1] = SPAWN_PLACES[randArr[i]][1] * WALL_CONST;
@@ -56,13 +57,6 @@ function getMap(maxBlockAmount = 150)
 
 function mapRand(maxBlockAmount)
 {
-       //constructor(x, y, w * 40, h * 40, health, isConstant = false)
-    // 30:20
-
-    // 22222
-    // 2  1
-    // 2  1
-    // 2111
     let temp = 0;
     let variate = getRandomInt(6) + 1; //amount of possible blocks to skip 
     let tankBlocks = 5; // amount of 100% cleared blocks at tank spawn 
@@ -75,7 +69,7 @@ function mapRand(maxBlockAmount)
         res[i] = new Array(mapHeight)
         for(let k = 0; k < mapHeight; ++k)
         {
-            if (i == 0 || i == mapWidth - 1 || k == 0 || k == mapHeight - 1) res[i][k] = 2;
+            if (i == 0 || i == mapWidth - 1 || k == 0 || k == mapHeight - 1) res[i][k] = 0;
             else if(
                 i < tankBlocks + 1 && k < tankBlocks + 1 || 
                 i > mapWidth - tankBlocks && k > mapHeight - tankBlocks || 
@@ -122,7 +116,7 @@ function mapParser(mapArr)
             switch(mapArr[i][k])
             {
                 case 1:
-                    res [counter++] = new Wall(x, y, WALL_CONST, WALL_CONST, getRandomInt(4) + 2);
+                    res [counter++] = new Wall(x, y, WALL_CONST, WALL_CONST, getRandomInt(3) + 2);
                     break;
                 case 2:
                     res [counter++] = new Wall(x, y, WALL_CONST, WALL_CONST, 1, true);
@@ -132,6 +126,11 @@ function mapParser(mapArr)
             }
         }
     }
+    res.push(new Wall(-50, 0, canvas.width+100, 50, 1, true))
+    res.push(new Wall(0, -50, 50, canvas.height+100, 1, true))
+    res.push(new Wall(canvas.width-50, -20, 50, canvas.height+100, 1, true))
+    res.push(new Wall(canvas.width-50, canvas.height-50, canvas.width+100, 50, 1, true))
+    res.push(new Wall(-50, canvas.height-50, canvas.width+100, 50, 1, true))
     return res;
 
 }

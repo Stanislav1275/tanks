@@ -1,12 +1,14 @@
 
 class Tank {
     constructor(tank_constructor, x, y, deg) {
+        this.keysImg =tank_constructor.keysImg
         this.x = x;
         this.y = y;
         this.sprite = tank_constructor.sprite;
         this.deg = deg;
         this.score = 0;
         this.hasBeenHit = false;
+        this.bullSprite = tank_constructor.bullSprite
         this.upPressed = false;
         this.leftPressed = false;
         this.downPressed = false;
@@ -20,7 +22,7 @@ class Tank {
         this.hasBeenHit = false;
         this.speed = 2;
         this.w = 48
-        this.rotSpeed = 2;
+        this.rotSpeed = 3;
         this.h = 32;
     }
 
@@ -84,12 +86,14 @@ class Tank {
             this.done = true;
             let xDirection = +(this.x + this.w / 2 + Math.cos(actualDeg * oneRad))
             let yDirection = +(this.y + this.h / 2 + Math.sin(actualDeg * oneRad))
-            bullets.push(new Bullet(xDirection, yDirection, this.bulletSpeed, actualDeg, this))
+            bullets.push(new Bullet(xDirection, yDirection, actualDeg, this))
         }
         if (this.leftPressed) {
+
             this.deg -= this.rotSpeed;
         }
         if (this.rightPressed) {
+
             this.deg += this.rotSpeed;
         }
         if (this.upPressed) {

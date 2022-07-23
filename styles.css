@@ -23,8 +23,12 @@ body {
     /*height: 50px;*/
 
 }
-
+#back.none:hover{
+    transition: 0.4s all ease;
+    transform: scale(1.2,1.2);
+}
 #back.none {
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,15 +43,20 @@ body {
 }
 
 #pause.none {
+
     display: flex;
     justify-content: center;
     align-items: center;
     display: block;
 }
+#pause.none:hover{
+    transition: 0.4s all ease;
+    transform: scale(1.2,1.2);
+}
 #canvas {
     display: none;
 
-    background-color: #eee;
+    background-color: #c1ffc2;
 }
 .block{
 }
@@ -62,10 +71,18 @@ body {
     display: block;
 
 }
+#btns img{
+    width: 150px;
 
+
+
+}
 #btns {
-    display: block;
-    width: 38%;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 #btns.none {
@@ -78,11 +95,12 @@ body {
     align-items: center;
 }
 #scoreBlock.none {
-    height: 200px;
+    padding: 20px;
     justify-content: space-around;
+    align-content: space-between;
     align-items: center;
     display: flex;
-    background-color: #8bd76e;
+    background-color: #66cc3c;
     border-radius:  0 0 20px 20px;
 }
 #scoreBlock.none .tank{
@@ -92,24 +110,34 @@ body {
     flex-wrap: nowrap;
     flex-direction: column;
 }
-#scoreBlock.none .tank:nth-child(1){
-    border: 1px solid black;
+#scoreBlock.none .tank h1{
+    font-size: 20px;
+    font-weight: 800;
+}
+#scoreBlock.none .tank#c0 h1{
     color: green;
 }
-#scoreBlock.none .tank:nth-child(2){
-    border: 1px solid black;
-
+#scoreBlock.none .tank#c1 h1{
     color: yellow;
 }
-#scoreBlock.none .tank:nth-child(3){
-    border: 1px solid black;
-
-    color: red;
+#scoreBlock.none .tank#c2 h1{
+    color: red
+}
+#scoreBlock.none .tank#c3 h1{
+    color: blue;
 }
 #scoreBlock {
     display: none;
 }
 
+.wrap_sc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrap_sc img{
+    width: 80px;
+}
 #scoreBlock h1 {
 
 }
@@ -118,10 +146,12 @@ body {
     font-size: 40px;
 
 }
-.playBtn{
-}
+
 #play{
-    overflow: hidden;
+    background-color: #eee;
+    border-radius: 20px;
+    display: flex;
+    /*overflow: hidden;*/
 }
 .playBtn{
     display: flex;
@@ -129,11 +159,7 @@ body {
     align-items: center;
     transition: 0.4s all ease;
     padding: 100px;
-    background-repeat: no-repeat;
-
-    background-size: cover;
-
-    background-image: url("./sprites/play_btn.png") ;
+    background-color: transparent;
     border: 0;
     border-radius: 20px;
 }
@@ -170,7 +196,10 @@ body {
     height: 50px;
 }
 
-.cfgBtn {
+#cfgBtn {
+    display: block;
 }
-
+#cfgBtn.none {
+    display: none;
+}
 
