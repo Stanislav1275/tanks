@@ -160,7 +160,7 @@ function init() {
                     left: "ArrowLeft",
                     down: "ArrowDown",
                     right: "ArrowRight",
-                    attack: "Space",
+                    attack: "Slash",
                 }, red_tank_img,keys_red,red_bull
             ),
             new TANK_CONSTRUCTOR({

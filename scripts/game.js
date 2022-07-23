@@ -1,6 +1,7 @@
 'use strict'
 window.addEventListener("keyup", (e) => {
     let code = e.code;
+    console.log(e)
     // e.stopPropagation()
     for (let tank of tanks) {
         for (let [key, value] of Object.entries(tank.keys)) {
